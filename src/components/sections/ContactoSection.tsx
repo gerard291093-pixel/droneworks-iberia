@@ -14,11 +14,27 @@ export default function ContactoSection() {
   const isInView = useInView(ref, { once: true });
   const [sector, setSector] = useState('');
   const [enviado, setEnviado] = useState(false);
+  const [enviando, setEnviando] = useState(false);
+  const [empresa, setEmpresa] = useState('');
+  const [email, setEmail] = useState('');
+  const [localizacion, setLocalizacion] = useState('');
+  const [descripcion, setDescripcion] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setEnviado(true);
-    setTimeout(() => setEnviado(false), 4000);
+    setEnviando(true);
+    try {
+      await fetch('/api/contacto', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ empresa, email, sector, localizacion, descripcion }),
+      });
+      setEnviado(true);
+    } catch {
+      setEnviado(true);
+    } finally {
+      setEnviando(false);
+    }
   };
 
   return (
@@ -131,6 +147,8 @@ export default function ContactoSection() {
                       type="text"
                       required
                       placeholder="Tu empresa"
+                      value={empresa}
+                      onChange={e => setEmpresa(e.target.value)}
                       className="w-full bg-white/5 border border-white/10 focus:border-[#C9A84C]/60 px-4 py-3 text-sm text-white placeholder:text-white/20 outline-none transition-colors duration-200"
                     />
                   </div>
@@ -142,6 +160,8 @@ export default function ContactoSection() {
                       type="email"
                       required
                       placeholder="tu@empresa.com"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
                       className="w-full bg-white/5 border border-white/10 focus:border-[#C9A84C]/60 px-4 py-3 text-sm text-white placeholder:text-white/20 outline-none transition-colors duration-200"
                     />
                   </div>
@@ -176,6 +196,8 @@ export default function ContactoSection() {
                   <input
                     type="text"
                     placeholder="Madrid, Barcelona, Lisboa..."
+                    value={localizacion}
+                    onChange={e => setLocalizacion(e.target.value)}
                     className="w-full bg-white/5 border border-white/10 focus:border-[#C9A84C]/60 px-4 py-3 text-sm text-white placeholder:text-white/20 outline-none transition-colors duration-200"
                   />
                 </div>
@@ -187,16 +209,19 @@ export default function ContactoSection() {
                   <textarea
                     rows={4}
                     placeholder="Describe tu instalación, tipo de suciedad, frecuencia..."
+                    value={descripcion}
+                    onChange={e => setDescripcion(e.target.value)}
                     className="w-full bg-white/5 border border-white/10 focus:border-[#C9A84C]/60 px-4 py-3 text-sm text-white placeholder:text-white/20 outline-none transition-colors duration-200 resize-none"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-4 text-[11px] tracking-[0.4em] uppercase font-black text-black bg-[#C9A84C] hover:bg-white transition-colors duration-300 flex items-center justify-center gap-3 mt-2 cursor-pointer"
+                  disabled={enviando}
+                  className="w-full py-4 text-[11px] tracking-[0.4em] uppercase font-black text-black bg-[#C9A84C] hover:bg-white transition-colors duration-300 flex items-center justify-center gap-3 mt-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Solicitar Presupuesto Gratuito
-                  <ArrowRight size={14} />
+                  {enviando ? 'Enviando...' : 'Solicitar Presupuesto Gratuito'}
+                  {!enviando && <ArrowRight size={14} />}
                 </button>
               </form>
             )}
