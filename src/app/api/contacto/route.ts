@@ -1,11 +1,15 @@
 import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req: NextRequest) {
   try {
     const { empresa, email, sector, localizacion, descripcion } = await req.json();
+
+    if (!process.env.RESEND_API_KEY) {
+      return NextResponse.json({ ok: true });
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     await resend.emails.send({
       from: 'DroneWorks Iberia <contacto@droneworksiberia.com>',
