@@ -12,7 +12,12 @@ export default function VideoHero({ videoSrc }: VideoHeroProps) {
 
   return (
     <section className="relative w-full h-[100dvh] overflow-hidden">
-      {/* Video background */}
+      {/* Fallback image for mobile */}
+      <div
+        className="absolute inset-0 bg-cover bg-center md:hidden"
+        style={{ backgroundImage: 'url(/images/hero-poster.jpg)' }}
+      />
+      {/* Video background (hidden on mobile) */}
       <video
         ref={videoRef}
         src={videoSrc}
@@ -20,7 +25,7 @@ export default function VideoHero({ videoSrc }: VideoHeroProps) {
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover hidden md:block"
       />
 
       {/* Overlay */}
