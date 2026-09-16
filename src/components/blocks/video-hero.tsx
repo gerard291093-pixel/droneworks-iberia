@@ -25,6 +25,7 @@ export default function VideoHero({ videoSrc }: VideoHeroProps) {
         muted
         loop
         playsInline
+        controls={false}
         className="absolute inset-0 w-full h-full object-cover hidden md:block"
       />
 
