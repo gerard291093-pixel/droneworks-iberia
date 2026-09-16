@@ -1,0 +1,39 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2a2a2a"/>
+      <stop offset="100%" stop-color="#111111"/>
+    </radialGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8c96a"/>
+      <stop offset="50%" stop-color="#C9A84C"/>
+      <stop offset="100%" stop-color="#a8822a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ring -->
+  <circle cx="100" cy="100" r="72" fill="none" stroke="#C9A84C" stroke-width="0.7" opacity="0.6"/>
+
+  <!-- Drone arms -->
+  <line x1="100" y1="100" x2="66" y2="66" stroke="url(#goldGrad)" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="100" y1="100" x2="134" y2="66" stroke="url(#goldGrad)" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="100" y1="100" x2="66" y2="134" stroke="url(#goldGrad)" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="100" y1="100" x2="134" y2="134" stroke="url(#goldGrad)" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Propeller rings -->
+  <circle cx="60" cy="60" r="10" fill="#141414" stroke="url(#goldGrad)" stroke-width="2"/>
+  <circle cx="140" cy="60" r="10" fill="#141414" stroke="url(#goldGrad)" stroke-width="2"/>
+  <circle cx="60" cy="140" r="10" fill="#141414" stroke="url(#goldGrad)" stroke-width="2"/>
+  <circle cx="140" cy="140" r="10" fill="#141414" stroke="url(#goldGrad)" stroke-width="2"/>
+
+  <!-- Center hexagon -->
+  <polygon
+    points="100,85 112,92.5 112,107.5 100,115 88,107.5 88,92.5"
+    fill="#0a0a0a"
+    stroke="url(#goldGrad)"
+    stroke-width="1.8"
+  />
+
+  <!-- Leaf/drop shape inside hexagon -->
+  <path d="M100,91 C104,96 104,104 100,109 C96,104 96,96 100,91 Z" fill="url(#goldGrad)"/>
+</svg>
