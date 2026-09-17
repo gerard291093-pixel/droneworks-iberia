@@ -78,13 +78,16 @@ export default function TestimonialsSection() {
       </div>
 
       {/* Marquee */}
-      <div className="group flex overflow-hidden [--gap:1.25rem] [gap:var(--gap)] [--duration:80s]">
-        <div className="flex shrink-0 justify-around [gap:var(--gap)] animate-marquee group-hover:[animation-play-state:paused]">
-          {[...Array(3)].map((_, setIndex) =>
-            testimonials.map((t, i) => (
-              <TestimonialCard key={`${setIndex}-${i}`} {...t} />
-            ))
-          )}
+      <div className="group flex overflow-hidden [--gap:1.25rem] [gap:var(--gap)] [--duration:60s]">
+        <div className="flex shrink-0 [gap:var(--gap)] animate-marquee group-hover:[animation-play-state:paused]">
+          {testimonials.map((t, i) => (
+            <TestimonialCard key={`a-${i}`} {...t} />
+          ))}
+        </div>
+        <div className="flex shrink-0 [gap:var(--gap)] animate-marquee group-hover:[animation-play-state:paused]" aria-hidden="true">
+          {testimonials.map((t, i) => (
+            <TestimonialCard key={`b-${i}`} {...t} />
+          ))}
         </div>
       </div>
 
